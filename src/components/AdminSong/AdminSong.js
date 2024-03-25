@@ -11,7 +11,7 @@ const AdminSong = ({title, url, duration, id, setSongsToCheck}) => {
   const fetchSongsToCheck = async () => {
     const adminCode = localStorage.getItem('adminId')
     try {
-      const response = await axios.get(`https://localhost:7087/songstocheck?adminCode=${adminCode}`)
+      const response = await axios.get(`https://radiowezelbackendwindows.azurewebsites.net/songstocheck?adminCode=${adminCode}`)
 
       setSongsToCheck(response.data)
     } catch(err) {
@@ -23,7 +23,7 @@ const AdminSong = ({title, url, duration, id, setSongsToCheck}) => {
 
   const refuseSong = async () => {
     try {
-      await axios.post(`https://localhost:7087/refusesong/${id}`)
+      await axios.post(`https://radiowezelbackendwindows.azurewebsites.net//refusesong/${id}`)
       await fetchSongsToCheck()
     } catch(err) {
       console.log(err)
@@ -32,7 +32,7 @@ const AdminSong = ({title, url, duration, id, setSongsToCheck}) => {
 
   const acceptSong = async () => {
     try {
-      await axios.post(`https://localhost:7087/acceptsong/${id}`)
+      await axios.post(`https://radiowezelbackendwindows.azurewebsites.net//acceptsong/${id}`)
       await fetchSongsToCheck()
     } catch(err) {
       console.log(err)

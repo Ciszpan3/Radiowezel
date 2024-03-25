@@ -22,7 +22,7 @@ const SongBarLikes = ({likes, id}) => {
 
   const fetchSongs = async () => {
     try {
-        const response = await axios.get('https://localhost:7087/getsongs', {
+        const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/getsongs', {
             params: {
                 userId: userId
             }
@@ -37,12 +37,14 @@ const SongBarLikes = ({likes, id}) => {
 
   const removeLike = async (songRemoveId) => {
     try {
-      const response = await fetch(`https://localhost:7087/unlikesong/${songRemoveId}?userId=${userId}`, {
+      const response = await fetch(`https://radiowezelbackendwindows.azurewebsites.net/unlikesong/${songRemoveId}?userId=${userId}`, {
         method: 'POST'
       });
       if (response.ok) {
-        await fetchSongs();
-      } 
+        fetchSongs();
+      } else {
+        console.clear()
+      }
     } catch (err) {
       console.error('Wystąpił błąd:', err);
     }
@@ -50,11 +52,13 @@ const SongBarLikes = ({likes, id}) => {
 
   const addElseLike = async () => {
     try {
-      const response = await fetch(`https://localhost:7087/likesong/${id}?userId=${userId}`, {
+      const response = await fetch(`https://radiowezelbackendwindows.azurewebsites.net/likesong/${id}?userId=${userId}`, {
         method: 'POST'
       });
       if (response.ok) {
-        await fetchSongs();
+        fetchSongs();
+      } else {
+        console.clear()
       }
     } catch (err) {
       console.error('Wystąpił błąd:', err);
@@ -63,32 +67,36 @@ const SongBarLikes = ({likes, id}) => {
 
   const addLike = async () => {
     const userSongLike = localStorage.getItem('userLike');
+    console.clear()
     setIsButtonActive(false)
     if (!userSongLike || userSongLike === 'null') {
         try {
-            const response = await fetch(`https://localhost:7087/likesong/${id}?userId=${userId}`, {
+            const response = await fetch(`https://radiowezelbackendwindows.azurewebsites.net/likesong/${id}?userId=${userId}`, {
                 method: 'POST'
             });
             if (response.ok) {
-                await fetchSongs();
+              fetchSongs();
+            } else {
+              console.clear()
             }
         } catch (err) {
             console.log('Błąd: ', err);
         }
     } else if (userSongLike && String(id) === userSongLike) {
-        console.log('unlikesong with the same id');
         try {
-            await removeLike(id);
+          removeLike(id);
         } catch (error) {
             console.log('Błąd: ', error);
         }
     } else if (userSongLike && String(id) !== userSongLike) {
         try {
-            const response1 = await fetch(`https://localhost:7087/unlikesong/${userSongLike}?userId=${userId}`, {
+            const response1 = await fetch(`https://radiowezelbackendwindows.azurewebsites.net/unlikesong/${userSongLike}?userId=${userId}`, {
                 method: 'POST'
             });
             if (response1.ok) {
-                await fetchSongs();
+              fetchSongs();
+            } else {
+              console.clear()
             }
             await addElseLike();
         } catch (error) {
@@ -100,7 +108,6 @@ const SongBarLikes = ({likes, id}) => {
 
   return ( 
     <div className='app__songBarLikes'>
-      {/* <img src={heart} alt="heart-icon" /> */}
       <div className={`anm_heart-mainBox ${String(id) === userLike ? 'heart-active' : ''}`} onClick={isButtonActive ? addLike : null}>
         <div className='anm_heart-box'>
           <span className='heartBtn'></span>

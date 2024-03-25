@@ -10,7 +10,7 @@ const WebSocket = () => {
 
     useEffect(() => {
         const newConnection = new HubConnectionBuilder()
-            .withUrl("https://localhost:7087/websocket")
+            .withUrl("https://radiowezelbackendwindows.azurewebsites.net/websocket")
             .build();
 
         setConnection(newConnection);
@@ -27,7 +27,7 @@ const WebSocket = () => {
                   const fetchSongs = async () => {
                     console.log('Voting started from a webSocket')
                     try {
-                        const response = await axios.get('https://localhost:7087/getsongs', {
+                        const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/getsongs', {
                             params: {
                                 userId: localStorage.getItem('userId')
                             }
@@ -42,7 +42,7 @@ const WebSocket = () => {
                 } else if(message === 'Like added to song.') {
                     const fetchSongs = async () => {
                         try {
-                            const response = await axios.get('https://localhost:7087/getsongs', {
+                            const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/getsongs', {
                                 params: {
                                     userId: localStorage.getItem('userId')
                                 }

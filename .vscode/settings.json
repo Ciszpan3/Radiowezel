@@ -1,0 +1,8 @@
+{
+  "appService.zipIgnorePattern": [
+    "node_modules{,/**}",
+    ".vscode{,/**}"
+  ],
+  "appService.defaultWebAppToDeploy": "/subscriptions/1ead7134-d6d0-4beb-b705-8ac72aa1219f/resourceGroups/Radiowezel/providers/Microsoft.Web/sites/radiowezelReact",
+  "appService.deploySubpath": "build"
+}

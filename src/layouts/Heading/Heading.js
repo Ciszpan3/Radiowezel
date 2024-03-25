@@ -29,13 +29,9 @@ const Heading = () => {
     console.log(isDarkMode)
     if(isDarkMode) {
       setDarkMode();
-      // circle.style.left = 'unset'
-      // circle.style.right = '2px'
       setIsDarkMode(false)
     } else {
       setLightMode();
-      // circle.style.right = 'unset'
-      // circle.style.left = '2px'
       setIsDarkMode(true)
     }
   }

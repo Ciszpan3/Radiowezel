@@ -22,32 +22,28 @@ const SongsProvider = ({children}) => {
     }
 
     const addSong = useCallback(async (songObject) => {
-        console.log(songObject)
         try {
-            const response = await axios.post('https://localhost:7087/addSong', songObject, {
+            const response = await axios.post('https://radiowezelbackendwindows.azurewebsites.net/addSong', songObject, {
                 headers: {
                   'Content-Type': 'application/json'
                 }
               });
-            console.log(response)
             if(response.status === 200) {
                 return 'Piosenka została dodana'
             }
         } catch(err) {
             console.log(err);
             if(err.response.status === 400) {
-                return 'Dopiero dodałeś piosenkę'
+                return 'Piosenka zawiera nicenzuralne słowa'
             } else {
                 return 'Coś poszło nie tak'
             }
         }
     }, []);
     useEffect(() => {
-        console.log('fetchSongs')
-        console.log(localStorage)
         const fetchSongs = async () => {
             try {
-                const response = await axios.get('https://localhost:7087/getsongs', {
+                const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/getsongs', {
                     params: {
                         userId: localStorage.getItem('userId')
                     }

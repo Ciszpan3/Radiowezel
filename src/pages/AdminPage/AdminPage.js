@@ -20,7 +20,7 @@ const AdminPage = () => {
 
   const fetchSongsToCheck = async (adminCode) => {
     try {
-      const response = axios.get(`https://localhost:7087/songstocheck?adminCode=${adminCode}`)
+      const response = axios.get(`https://radiowezelbackendwindows.azurewebsites.net/songstocheck?adminCode=${adminCode}`)
 
       return response
     } catch(err) {
@@ -37,7 +37,7 @@ const AdminPage = () => {
     }
     console.log(data)
     try {
-      const response = await axios.post('https://localhost:7087/adminlogin', JSON.stringify(data), {
+      const response = await axios.post('https://radiowezelbackendwindows.azurewebsites.net/adminlogin', JSON.stringify(data), {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -57,50 +57,11 @@ const AdminPage = () => {
             console.log(err)
           })
       }
-      // localStorage.setItem('userId', response.data.id)
     } catch(err) {
       setValidateMessage('Login lub hasło jest niepoprawne')
       console.log(err)
     }
   }
-
-  // const hangfireLogin = () => {
-  //   const hangfireCode = localStorage.getItem('hangfireCode')
-
-  //   try {
-  //     const response = axios.get('https://localhost:7087/hangfire', {
-  //       headers: {
-  //         'Authorization': `${hangfireCode}`
-  //       }
-  //     })
-
-  //     console.log(response)
-  //   } catch(err) {
-  //     console.log(err)
-  //   }
-      // const requestOptions = {
-      //   method: 'GET',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Authentication': `${hangfireCode}`
-      //   }
-      // };
-      
-      // const testowyLink = 'https://loclahost:7087/hangfire';
-
-      // fetch(testowyLink, requestOptions)
-      // .then(response => {
-      //   console.log(response);
-      // })
-      // .catch(error => {
-      //   console.error('Błąd:', error);
-      // });
-      // Tutaj zastąp 'testowy_link' właściwym adresem URL
-  
-      // Otwiera link w nowym oknie
-      // window.open(testowyLink, '_blank');
-
-  //}
 
   return ( 
     <>
@@ -124,7 +85,6 @@ const AdminPage = () => {
       {isLoginned && 
         <div className='app__admin'>
           <h1>AdminPage</h1>
-          {/* <button onClick={hangfireLogin}>cos</button> */}
 
           <div className='app__admin-songs'>
             {songsToCheck.length > 0 && songsToCheck.map(song => (

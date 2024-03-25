@@ -7,7 +7,7 @@ import { SongsContext } from '../../context/SongsProvider';
 import { FaCircleXmark } from "react-icons/fa6";
 import { Modal } from '../../components'
 import { excl_mark } from '../../assets';
-import { parseISO, getTime, formatDuration } from 'date-fns';
+import { parseISO, getTime } from 'date-fns';
 
 import './FirstEntry.css'
 
@@ -36,15 +36,14 @@ const FirstEntry = ({ handleShowToast }) => {
 
   const fetchSongs = async (userId) => {
     try {
-        const response = await axios.get('https://localhost:7087/getsongs', {
+        const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/getsongs', {
             params: {
                 userId: userId
             }
         });
 
         await setUserLike(response.data.userLike)
-        await localStorage.setItem('userLike', response.data.userLike)
-        console.log(response.data.userLike)
+        localStorage.setItem('userLike', response.data.userLike)
         setDataSongs(response.data.dtos)
     } catch(err) {
         console.log(err)
@@ -54,7 +53,7 @@ const FirstEntry = ({ handleShowToast }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post('https://localhost:7087/newuser')
+        const response = await axios.post('https://radiowezelbackendwindows.azurewebsites.net//newuser')
         // setUserId(response.data.id)
         localStorage.setItem('userPin', response.data.userCode)
         setUserPin(response.data.userCode)
@@ -129,7 +128,7 @@ const FirstEntry = ({ handleShowToast }) => {
           try {
             const userPinJson = JSON.stringify(pinValues.toUpperCase())
             const response = await axios.post(
-              'https://localhost:7087/login',
+              'https://radiowezelbackendwindows.azurewebsites.net//login',
               `${userPinJson}`, // Dane jako string
               {
                headers: {
@@ -140,7 +139,6 @@ const FirstEntry = ({ handleShowToast }) => {
             if(response.status === 200) {
               handleClose();
               handleShowToast()
-              console.log(response)
               localStorage.setItem('userId', response.data.loginModel.userId)
               setUserId(response.data.loginModel.userId)
               const startDate = response.data.loginModel.lastAddedSongDate
@@ -152,9 +150,7 @@ const FirstEntry = ({ handleShowToast }) => {
               await fetchSongs(response.data.loginModel.userId)
               if(response.data.playingSong.includes('SongId')) {
                 const playingSongJSON = response.data.playingSong
-                console.log(playingSongJSON)
                 const playingSong = JSON.parse(playingSongJSON)
-                console.log(playingSong)
                 await getPlayingSong(playingSong.SongId, playingSong.Duration)
               } else {
                 setPlayingSong('Żadna piosenka nie gra')

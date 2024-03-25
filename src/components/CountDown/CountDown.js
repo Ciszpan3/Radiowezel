@@ -12,10 +12,7 @@ const CountdownCircle = () => {
   useEffect(() => {
     const calculateRemainingTime = () => {
       const currentTime = Date.now();
-      console.log(endTime)
-      console.log(startTime)
       const remainingTime = endTime - currentTime;
-      console.log(remainingTime)
       if (remainingTime <= 0 && startTime) {
         clearInterval(intervalId);
         if (setStartTime) {
