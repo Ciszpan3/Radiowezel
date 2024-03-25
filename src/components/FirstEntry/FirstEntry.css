@@ -1,0 +1,80 @@
+.app__pinModal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  padding: 0.75rem;
+  border-radius: 42px;
+  background: var(--bg-info);
+  opacity: 0.9;
+}
+.app__pinModal-startText {
+  font-family: var(--font-info);
+  color: var(--text-bl_wh);
+  font-size: 30px;
+  text-align: center;
+}
+.app__pinModal-pin {
+  color: var(--text-bl_wh);
+  font-family: var(--font-base);
+  font-size: 45px;
+  font-weight: 400;
+}
+
+.app__firstEntry-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+
+  padding: 0.6rem;
+  border-radius: 42px;
+  background: var(--bg-info);
+}
+
+.app__firstEntry-modal img {
+  color: var(--text-bl_wh);
+}
+.app__firstEntry-modal p {
+  color: var(--text-bl_wh);
+  font-family: var(--font-info);
+  font-size: 39px;
+  font-weight: unset;
+  line-height: 39px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+.app__firstEntry-closeBtn {
+  color: var(--text-bl_wh);
+  cursor: pointer;
+  font-size: 40px;
+}
+.app__firstEntry-closeBtn:hover {
+  opacity: 0.8;
+}
+
+.app__firstEntry-modal_inputCont {
+  margin-bottom: 0.5rem;
+}
+.pin_inputs-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+.add__pinField {
+  text-align: center;
+  width: 40px;
+  font-size: 28px;
+  background: var(--bg-pin_input);
+  border: none;
+  outline-color: blue;
+  padding: 0.5rem 0.4rem;
+  color: var(--text-bl_wh);
+  border: 2px solid var(--bg-add_form);
+  border-radius: 8px;
+  text-transform: uppercase;
+}

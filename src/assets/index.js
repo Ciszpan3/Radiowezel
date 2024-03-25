@@ -1,0 +1,8 @@
+export { default as heading } from './heading.png'
+export { default as heading_top } from './heading-top.png'
+export { default as heading_down } from './heading-down.png'
+export { default as music } from './music.png'
+export { default as heart } from './heart-icon.png'
+export { default as pexels_music } from './pexels-music.jpg'
+export { default as anm_heart } from './anm-heart.png'
+export { default as excl_mark } from './excl.png'

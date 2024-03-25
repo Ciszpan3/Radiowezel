@@ -1,0 +1,150 @@
+/* --bg-add_form
+--bg-add_formBorder
+--bg-add_inputBox
+--bg-add_input
+--color-addBorder */
+
+.app__addModal {
+  margin: 0px auto;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 42px;
+  padding: 0.7rem;
+  border: 3px solid var(--color-formBorder);
+  background: var(--bg-add_form);
+}
+
+.app__addModal-top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.app__addModal-cross {
+  color: #FFFFFF;
+  font-size: 30px;
+  cursor: pointer;
+}
+.app__addModal-cross:hover {
+  opacity: 0.7;
+}
+
+.app__addModal-mainBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.app__addModal-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  padding: 0.15rem 0.15rem 0.15rem 0.6rem;
+  border: 3px solid var(--color-addBorder);
+  border-radius: 27px;
+  background: var(--bg-add_inputBox);
+}
+.app__addModal-yt {
+  color: #FFFFFF;
+  font-size: 26px;
+}
+.app__addModal-content input {
+  width: 100%;
+  border: none;
+  background: var(--bg-add_input);
+  color: var(--text-bl_wh);
+  font-size: 24px;
+  padding: 0.6rem 0.4rem;
+
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 27px;
+  border-bottom-right-radius: 27px;
+}
+.app__addModal-content input::placeholder {
+  color: var(--text-addPlaceH);
+  font-family: var(--font-base);
+}
+
+.app__addModal-songs {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.app__addModal-songs ul {
+  list-style-type: circle;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.25rem;
+}
+.app__addModal-songs li {
+  color: #FFFFFF;
+  font-size: 16px;
+  font-family: var(--font-base);
+}
+
+.app__addModal-button {
+  min-width: 155px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+
+  padding: 0.5rem;
+  background: var(--bg-add_inputBox);
+  border: 3px solid var(--color-addBorder);
+  border-radius: 14px;
+}
+.app__addModal-button:hover {
+  opacity: 0.85;
+}
+.app__addModal-add {
+  font-size: 26px;
+  color: #FFFFFF;
+}
+.app__addModal-button p {
+  color: #FFFFFF;
+  font-size: 14px;
+  font-family: var(--font-base);
+}
+
+.app__addModal-valMsg {
+  font-size: 14px;
+  color: rgba(227, 39, 39, 0.909);
+  font-family: var(--font-base);
+}
+.app__addModal-songAddMsg {
+  font-size: 15px;
+  color: green;
+  font-family: var(--font-base);
+}
+
+@media screen and (min-width: 1050px) {
+  .app__addModal-content input {
+    font-size: 30px;
+  }
+  .app__addModal-button p {
+    font-size: 17px;
+  }
+  .app__addModal-add {
+    font-size: 31px;
+  }
+}

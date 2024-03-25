@@ -1,0 +1,107 @@
+.app__admin-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+
+  margin: 0 auto;
+  padding: 1rem;
+  border-radius: 20px;
+  background: rgba(22, 22, 22, 0.533);
+  border: 1px solid black;
+  max-width: 800px;
+}
+
+.app__admin-login p {
+  font-size: 18px;
+  color: rgb(223, 217, 217);
+}
+
+.app__admin-login_inputBoxes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  gap: 0.5rem;
+}
+.app__admin-login_inputBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 80%;
+
+  gap: 0.7rem;
+}
+
+.app__admin-login_inputBox input {
+  width: 100%;
+  padding: 4px 7px;
+  font-size: 15px;
+  border-radius: 8px;
+  color: black;
+  border: 1px solid black;
+  background: rgba(157, 155, 155, 0.915);
+  font-family: var(--font-base);
+}
+.app__admin-login_inputBox input::placeholder {
+  color: black;
+  opacity: 0.7;
+  font-family: var(--font-base);
+}
+.app__admin-valmsg {
+  color: rgb(204, 14, 14) !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+  font-family: var(--font-base);
+}
+
+.app__admin-login button {
+  color: black;
+  padding: 8px 12px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  background: darkgray;
+  cursor: pointer;
+}
+.app__admin-login button:hover {
+  opacity: 0.75;
+}
+
+
+.app__admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 100vh;
+
+  background: lightgray;
+  padding: 1rem 0rem;
+}
+
+.app__admin-songs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+
+  width: 100%;
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 500px) {
+  .app__admin-login_inputBox {
+    width: 90%;
+  }
+  .app__admin-login_inputBox input {
+    font-size: 13px;
+    padding: 3px 5px;
+  }
+}

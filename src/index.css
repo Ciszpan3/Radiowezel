@@ -1,3 +1,59 @@
+/* @import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities'; */
+
+:root {
+  --bg-main: #CFEEFF;
+  --bg-songBar: linear-gradient(180deg, #5C7DD1 0%, #7192E7 33.33%, #569AFF 66.67%, #4189F4 100%);
+  --bg-head: radial-gradient(194.62% 194.62% at 50% 50%, #5C7DD1 0%, #7192E7 33.33%, #569AFF 66.67%, #4189F4 100%);
+  --bg-side: #FFFFFF57;
+  --bg-title: #5C7DD1;
+  --bg-toggleCircle: #D9D9D9;
+  --bg-toggleBtn: #FFFFFF57;
+  --bg-info: #FFFFFFED;
+  --bg-heart_main: #4FAAFF;
+  --bg-add_form: #5C7DD166;
+  --bg-add_inputBox: #9CB7FD;
+  --bg-add_input: #BCCFFF;
+  --bg-pin_input: #6582CB;
+  --color-formBorder: #4678C2;
+  --color-addBorder: #6582CB;
+  --font-base: "Reem Kufi", sans-serif;
+  --font-sec: "Kulim Park", sans-serif;
+  --font-info: "Jomhuria", serif;
+  --text-base: #FFFFFF;
+  --text-bl_wh: #000000;
+  --text-addPlaceH: #5C7DD140;
+
+  --content-justBtn: flex-start;
+}
+
+[data-theme="dark"] {
+  --bg-main: #2F3233;
+  --bg-songBar: linear-gradient(180deg, #153C6A 0%, #1E3E91 33.33%, #1F54A4 66.67%, #2260BC 100%);
+  --bg-head: radial-gradient(194.62% 194.62% at 50% 50%, #0D1F4E 0%, #1E3264 33.33%, #1B3E72 66.67%, #215198 100%);
+  --bg-side: #13163257;
+  --bg-title: #213874;
+  --bg-toggleCircle: #2675fed0;
+  --bg-toggleBtn: #2a4fad71;
+  --bg-info: #121111ED;
+  --bg-heart_main: #2B4F70;
+  --bg-add_form: #07315896;
+  --bg-add_inputBox: #112F5A;
+  --bg-add_input: #2B4F70;
+  --bg-pin_input: rgba(1, 3, 68, 0.942);
+  --color-formBorder: #4678C2;
+  --color-addBorder: #2B4F70;
+  --font-base: "Reem Kufi", sans-serif;
+  --font-sec: "Kulim Park", sans-serif;
+  --font-info: "Jomhuria", serif;
+  --text-base: #FFFFFF;
+  --text-bl_wh: #ffffffda;
+  --text-addPlaceH: #697C98A1;
+
+  --content-justBtn: flex-end;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +66,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }

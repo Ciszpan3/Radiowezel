@@ -1,0 +1,27 @@
+.countdown-container {
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+
+.countdown-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.countdown-path {
+  fill: none;
+  stroke-width: 2;
+  stroke: #007bff; /* Kolor okręgu */
+  stroke-dasharray: 100;
+  transition: stroke-dasharray 1s linear;
+}
+
+.countdown-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  color: #007bff; /* Kolor tekstu */
+}

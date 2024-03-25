@@ -1,0 +1,63 @@
+.app__songBarInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  
+  width: 259px;
+  background: var(--bg-side);
+  padding: 0.2rem;
+  color: var(--text-base);
+  border-radius: 14px;
+}
+
+.app__songBarInfo-content {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.2rem;
+}
+.app__songBarInfo-content div {
+  display: flex;
+  gap: 0.05rem;
+  justify-content: flex-start;
+  align-items: center;
+}
+.app__songBarInfo-content-icons {
+  color: var(--text-base);
+}
+
+@media screen and (min-width: 800px) {
+  .app__songBarInfo {
+    width: 374px;
+  }
+  .app__songBarInfo-content-icons {
+    font-size: 19px;
+  }
+  .app__songBarInfo-content-icons.bigger-icon {
+    font-size: 23px;
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  .app__songBarInfo {
+    width: 560px;
+  }
+  .app__songBarInfo-content-icons {
+    font-size: 22px;
+  }
+  .app__songBarInfo-content-icons.bigger-icon {
+    font-size: 26px;
+  }
+
+  .app__songBarInfo {
+    width: 82%;
+  }
+}
+
+@media screen and (min-width: 1350px) {
+  .app__songBarInfo {
+    width: 454px;
+  }
+}

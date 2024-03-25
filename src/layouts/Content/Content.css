@@ -1,0 +1,29 @@
+.app__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+
+  /* Odpowiedzialny za szerokosc */
+  max-width: 370px;
+  width: 100%;
+}
+
+@media screen and (min-width: 800px) {
+  .app__content {
+    max-width: 500px;
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  .app__content {
+    max-width: 700px;
+  }
+}
+
+@media screen and (min-width: 1350px) {
+  .app__content {
+    max-width: 600px;
+  }
+}
