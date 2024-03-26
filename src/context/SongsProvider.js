@@ -16,6 +16,12 @@ const SongsProvider = ({children}) => {
     const [startTime, setStartTime] = useState('')
     const [endTime, setEndTime] = useState('')
     const [playingSong, setPlayingSong] = useState({})
+    const [isOpen, setIsOpen] = useState(false);
+    const [isNonActiveOpen, setIsNonActiveOpen] = useState(false)
+    const [isFirstModalOpen, setIsFirstModalOpen] = useState(false)
+    const [userPin, setUserPin] = useState('')
+    const [isRefreshVisible, setIsRefreshVisible] = useState(false)
+
 
     const handleShowToast = (msg) => {
         toast.success(<ToastComponent message={msg}/>, { autoClose: 2000 });
@@ -40,27 +46,27 @@ const SongsProvider = ({children}) => {
             }
         }
     }, []);
-    useEffect(() => {
-        const fetchSongs = async () => {
-            try {
-                const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/getsongs', {
-                    params: {
-                        userId: localStorage.getItem('userId')
-                    }
-                });
+    // useEffect(() => {
+    //     const fetchSongs = async () => {
+    //         try {
+    //             const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/getsongs', {
+    //                 params: {
+    //                     userId: localStorage.getItem('userId')
+    //                 }
+    //             });
 
-                setDataSongs(response.data.dtos)
-            } catch(err) {
-                console.log(err)
-            }
-        }
-        if(localStorage.getItem('userId')) {
-            fetchSongs();
-        }
-    }, [addSong, setUserId])
+    //             setDataSongs(response.data.dtos)
+    //         } catch(err) {
+    //             console.log(err)
+    //         }
+    //     }
+    //     if(localStorage.getItem('userId')) {
+    //         fetchSongs();
+    //     }
+    // }, [addSong, setUserId])
 
   return (
-    <SongsContext.Provider value={{songs, setSongs, userId, setUserId, dataSongs, setDataSongs, addSong, handleShowToast, startTime, endTime, setStartTime, setEndTime, playingSong, setPlayingSong, userLike, setUserLike}}>
+    <SongsContext.Provider value={{songs, setSongs, userId, setUserId, dataSongs, setDataSongs, addSong, handleShowToast, startTime, endTime, setStartTime, setEndTime, playingSong, setPlayingSong, userLike, setUserLike, isOpen, setIsOpen, isNonActiveOpen, setIsNonActiveOpen, isFirstModalOpen, setIsFirstModalOpen, userPin, setUserPin, isRefreshVisible, setIsRefreshVisible}}>
       {children}
     </SongsContext.Provider>
   )

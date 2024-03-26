@@ -64,7 +64,6 @@ const App = () => {
     };
 }, []);
 useEffect(() => {
-  console.log('ladowanie strony')
   const handleLogout = async () => {
     const userId = localStorage.getItem('userId')
     try {

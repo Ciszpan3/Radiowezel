@@ -273,6 +273,14 @@
   color: var(--text-base);
 }
 
+.app__firsteEntry-textNotRemember {
+  margin-top: 0.35rem !important;
+  font-size: 26px !important;
+  line-height: 32px !important;
+  font-family: var(--font-base);
+  color: red !important;
+}
+
 
 @media screen and (min-width: 800px) {
   .app__heading {
@@ -366,6 +374,12 @@
   }
   .app__heading-head-main p {
     font-size: 29px;
+  }
+  .app__firstEntry-notRemember {
+    font-size: 30px !important;
+  }
+  .app__firsteEntry-textNotRemember {
+    font-size: 30px !important;
   }
 
   .p_reem-footer {

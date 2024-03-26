@@ -14,21 +14,21 @@ import './FirstEntry.css'
 
 const FirstEntry = ({ handleShowToast }) => {
 
-  const {setUserId, setDataSongs, setStartTime, setEndTime, setPlayingSong, setUserLike} = useContext(SongsContext)
-  const [isFirstModalOpen, setIsFirstModalOpen] = useState(false)
-  const [isOpen, setIsOpen] = useState(false);
-  const [userPin, setUserPin] = useState('')
+  const {setUserId, setDataSongs, setStartTime, setEndTime, setPlayingSong, setUserLike, isOpen, setIsOpen, isNonActiveOpen, setIsNonActiveOpen, setIsFirstModalOpen, isFirstModalOpen, userPin, setUserPin, isRefreshVisible, setIsRefreshVisible} = useContext(SongsContext)
   const [validateMessage, setValidateMessage] = useState('')
   const [pin, setPin] = useState(['', '', '', '']);
-  // const { setUserId, userId } = useContext(SongsContext)
 
   const handleClose = () => {
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
+  const handleNonActiveClose = () => {
+    setIsNonActiveOpen(false)
+  }
 
   const handleCloseFirstModal = () => {
     setIsFirstModalOpen(false)
     setIsOpen(true)
+    setIsRefreshVisible(false)
     const firstInput = document.getElementById('add__pinField-first');
     if(firstInput) {
       firstInput.focus();
@@ -65,8 +65,7 @@ const FirstEntry = ({ handleShowToast }) => {
     try {
       const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/isvotingactive')
 
-      console.log(response)
-      if(response) {
+      if(response.data) {
         const isFirstModalDisplayed = localStorage.getItem('firstModalDisplayed');
         if (!isFirstModalDisplayed) {
           localStorage.setItem('firstModalDisplayed', 'true');
@@ -74,16 +73,26 @@ const FirstEntry = ({ handleShowToast }) => {
           setIsFirstModalOpen(true); // Ustawiamy isOpen na true, aby pokazać modal
         }
         if (isFirstModalDisplayed) {
+          const userId = localStorage.getItem('userId')
+          try {
+            await axios.post('https://radiowezelbackendwindows.azurewebsites.net/logout', JSON.stringify(userId), {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            });
+          } catch(err) {
+            console.log(err)
+          }
           setIsOpen(true)
         }
+      } else {
+        setIsNonActiveOpen(true)
       }
     } catch(err) {
       console.error(err)
     }
   }, []);
   
-  // const userPin = localStorage.getItem('userPin')
-  // console.log(userPin)
   function formatTime(miliseconds) {
     const seconds= Math.floor((miliseconds / 1000) % 60);
     const minutes = Math.floor((miliseconds / (1000 * 60)) % 60);
@@ -113,8 +122,10 @@ const FirstEntry = ({ handleShowToast }) => {
 
     async function handleInputChange(index, event) {
         const value = event.target.value;
+        if(validateMessage) {
+          setValidateMessage('')
+        }
 
-        // Sprawdź, czy wartość spełnia wymagania patternu, jeśli nie, zignoruj ją
         if (!value.match(/[0-9a-zA-Z]/)) {
             return;
         }
@@ -167,6 +178,7 @@ const FirstEntry = ({ handleShowToast }) => {
           } catch(err) {
             console.log(err)
             setValidateMessage('Pin jest nieprawidłowy')
+
           }
         }
 
@@ -189,6 +201,25 @@ const FirstEntry = ({ handleShowToast }) => {
       }
     }
 
+    const fetchData = async () => {
+      try {
+        const response = await axios.post('https://radiowezelbackendwindows.azurewebsites.net/newuser')
+        // setUserId(response.data.id)
+        localStorage.setItem('userPin', response.data.userCode)
+        setUserPin(response.data.userCode)
+      } catch(err) {
+        console.log(err)
+      }
+    }
+
+    const handlePinNotRememebered = async () => {
+      handleClose();
+      await fetchData()
+      setIsFirstModalOpen(true)
+      setValidateMessage('')
+    }
+
+
   return (
     <>
     <Modal isOpen={isFirstModalOpen} handleClose={handleCloseFirstModal}>
@@ -203,7 +234,7 @@ const FirstEntry = ({ handleShowToast }) => {
         <FaCircleXmark onClick={handleCloseFirstModal} className='app__firstEntry-closeBtn'/>
       </div>
     </Modal>
-    {!isFirstModalOpen && <Modal isOpen={isOpen} handleClose={handleClose}>
+    {!isFirstModalOpen && <Modal isOpen={isOpen} handleClose={handleClose} isLoginModal={true}>
       <div className='app__firstEntry-modal'>
         <img src={excl_mark} alt="exclamation_mark" />
         <p>Aplikacja działa na zasadzie głosowań, uczniowie mogą dodawać piosenki poprzez link (youtube)
@@ -228,12 +259,15 @@ const FirstEntry = ({ handleShowToast }) => {
             />
           ))}
         </div>
+        {isRefreshVisible ? <p className='app__firstEntry-notRemember' onClick={handlePinNotRememebered}>Nie pamiętam kodu</p> : <p className='app__firsteEntry-textNotRemember'>Jeśli nie pamiętasz kodu, za 1 min pojawi się przycisk do resetu</p>}
         </form>
         {/* <FaCircleXmark onClick={handleClose} className='app__firstEntry-closeBtn'/> */}
       </div>
     </Modal>}
-    <Modal isNonActiveOpen={isNonActiveOpen} handleClose={handleNonActiveClose}>
-      <div>Strona nie jest narazie aktywna</div>
+    <Modal isOpen={isNonActiveOpen} handleClose={handleNonActiveClose}>
+      <div className='app__firstEntry-modal'>
+        <p>Strona jest narazie nieaktywna. Poczekaj do następnej przerwy</p>
+      </div>
     </Modal>
     </>
   );

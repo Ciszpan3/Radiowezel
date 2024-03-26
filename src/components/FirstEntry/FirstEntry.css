@@ -35,6 +35,19 @@
   background: var(--bg-info);
 }
 
+.app__firstEntry-notRemember {
+  margin-top: 0.35rem !important;
+  font-size: 26px !important;
+  color: aliceblue !important;
+  font-family: var(--font-base);
+  transition: opacity 0.15s !important;
+  cursor: pointer;
+}
+.app__firstEntry-notRemember:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
 .app__firstEntry-modal img {
   color: var(--text-bl_wh);
 }

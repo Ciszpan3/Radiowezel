@@ -1,12 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import ReactDOM from 'react-dom';
+import { SongsContext } from '../../context/SongsProvider';
 
 import './Modal.css'
 
-const Modal = ({children, isOpen, handleClose}) => {
+const Modal = ({children, isOpen, handleClose, isLoginModal}) => {
 
   const modalRef = useRef(null)
   const previousActiveElement = useRef(null)
+  const {setIsRefreshVisible} = useContext(SongsContext)
 
   useEffect(() => {
     if(!modalRef.current) {
@@ -38,6 +40,15 @@ const Modal = ({children, isOpen, handleClose}) => {
       modal.removeEventListener('cancel', handleCancel)
     }
   }, [handleClose])
+
+
+  useEffect(() => {
+    if (isLoginModal) {
+        setTimeout(() => {
+            setIsRefreshVisible(true);
+        }, 90000);
+    }
+  }, [isLoginModal]);
 
   return ReactDOM.createPortal(( 
     <dialog className='app__modal' ref={modalRef}>

@@ -6,7 +6,7 @@ import { SongsContext } from '../../context/SongsProvider';
 
 const WebSocket = () => {
     const [connection, setConnection] = useState(null);
-    const {setDataSongs, setPlayingSong} = useContext(SongsContext)
+    const {setDataSongs, setPlayingSong, setIsOpen, setIsNonActiveOpen, setIsFirstModalOpen, setUserPin} = useContext(SongsContext)
 
     useEffect(() => {
         const newConnection = new HubConnectionBuilder()
@@ -27,19 +27,52 @@ const WebSocket = () => {
                   const fetchSongs = async () => {
                     console.log('Voting started from a webSocket')
                     try {
-                        const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/getsongs', {
-                            params: {
-                                userId: localStorage.getItem('userId')
+                        // const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/getsongs', {
+                        //     params: {
+                        //         userId: localStorage.getItem('userId')
+                        //     }
+                        // });
+                        // localStorage.setItem('userLike', response.data.userLike)
+                        console.log('open loginFields')
+                        const userId = localStorage.getItem('userId')
+                        try {
+                            await axios.post('https://radiowezelbackendwindows.azurewebsites.net/logout', JSON.stringify(userId), {
+                            headers: {
+                                'Content-Type': 'application/json'
                             }
-                        });
-                        localStorage.setItem('userLike', response.data.userLike)
-                        setDataSongs(response.data.dtos)
+                            });
+                        } catch(err) {
+                            console.log(err)
+                        }
+                        setIsNonActiveOpen(false)
+                        if(userId) {
+                            setIsOpen(true)
+                        } else {
+                            const fetchData = async () => {
+                                try {
+                                  const response = await axios.post('https://radiowezelbackendwindows.azurewebsites.net/newuser')
+                                  // setUserId(response.data.id)
+                                  localStorage.setItem('userPin', response.data.userCode)
+                                  setUserPin(response.data.userCode)
+                                } catch(err) {
+                                  console.log(err)
+                                }
+                              }
+                              await fetchData();
+                            setIsFirstModalOpen(true)
+                        }
+                        // setDataSongs(response.data.dtos)
                     } catch(err) {
                         console.log(err)
                     }
                   }
                   fetchSongs();
-                } else if(message === 'Like added to song.') {
+                } else if(message === 'Voting ended.') {
+                    setIsNonActiveOpen(true)
+                    setPlayingSong('Żadna piosenka narazie nie gra')
+                    setDataSongs([])
+                }
+                else if(message === 'Like added to song.') {
                     const fetchSongs = async () => {
                         try {
                             const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/getsongs', {
