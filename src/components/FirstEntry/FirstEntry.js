@@ -8,6 +8,7 @@ import { FaCircleXmark } from "react-icons/fa6";
 import { Modal } from '../../components'
 import { excl_mark } from '../../assets';
 import { parseISO, getTime } from 'date-fns';
+import { BeatLoader } from 'react-spinners';
 
 import './FirstEntry.css'
 
@@ -50,10 +51,10 @@ const FirstEntry = ({ handleShowToast }) => {
     }
   }
 
-  useEffect(() => {
+  useEffect(async () => {
     const fetchData = async () => {
       try {
-        const response = await axios.post('https://radiowezelbackendwindows.azurewebsites.net//newuser')
+        const response = await axios.post('https://radiowezelbackendwindows.azurewebsites.net/newuser')
         // setUserId(response.data.id)
         localStorage.setItem('userPin', response.data.userCode)
         setUserPin(response.data.userCode)
@@ -61,21 +62,29 @@ const FirstEntry = ({ handleShowToast }) => {
         console.log(err)
       }
     }
-    const isFirstModalDisplayed = localStorage.getItem('firstModalDisplayed');
-    if (!isFirstModalDisplayed) {
-      localStorage.setItem('firstModalDisplayed', 'true');
-      fetchData();
-      setIsFirstModalOpen(true); // Ustawiamy isOpen na true, aby pokazać modal
-    }
-    if (isFirstModalDisplayed) {
-      setIsOpen(true)
+    try {
+      const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/isvotingactive')
+
+      console.log(response)
+      if(response) {
+        const isFirstModalDisplayed = localStorage.getItem('firstModalDisplayed');
+        if (!isFirstModalDisplayed) {
+          localStorage.setItem('firstModalDisplayed', 'true');
+          fetchData();
+          setIsFirstModalOpen(true); // Ustawiamy isOpen na true, aby pokazać modal
+        }
+        if (isFirstModalDisplayed) {
+          setIsOpen(true)
+        }
+      }
+    } catch(err) {
+      console.error(err)
     }
   }, []);
   
   // const userPin = localStorage.getItem('userPin')
   // console.log(userPin)
   function formatTime(miliseconds) {
-    console.log(miliseconds)
     const seconds= Math.floor((miliseconds / 1000) % 60);
     const minutes = Math.floor((miliseconds / (1000 * 60)) % 60);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
@@ -83,7 +92,6 @@ const FirstEntry = ({ handleShowToast }) => {
   
 
   const getPlayingSong = async (videoId, dur) => {
-    console.log(videoId)
     const apiKey = 'AIzaSyBsOaeliSFqW6myMwAgpXslA8xhXpT7Owk'
     const apiUrl =`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${apiKey}`
     try {
@@ -95,7 +103,6 @@ const FirstEntry = ({ handleShowToast }) => {
         id: videoId,
         duration: `00:0${duration}`
       }
-      console.log(songObject)
       setPlayingSong(songObject)
     } catch(err) {
       console.log(err)
@@ -128,7 +135,7 @@ const FirstEntry = ({ handleShowToast }) => {
           try {
             const userPinJson = JSON.stringify(pinValues.toUpperCase())
             const response = await axios.post(
-              'https://radiowezelbackendwindows.azurewebsites.net//login',
+              'https://radiowezelbackendwindows.azurewebsites.net/login',
               `${userPinJson}`, // Dane jako string
               {
                headers: {
@@ -189,7 +196,9 @@ const FirstEntry = ({ handleShowToast }) => {
         <p className='app__pinModal-startText'>Witaj w oficjalnej aplikacji Radiowęzła Zespołu Szkół Zawodowych w Gostyniu.
           Poniżej znajduje się kod dzięki któremu będziesz miał/a dostęp do wszystkich funkcji aplikacji.
         </p>
-        <p className='app__pinModal-pin'>{userPin}</p>
+        {userPin ? 
+        <p className='app__pinModal-pin'>{userPin}</p> : 
+        <BeatLoader color="#ffffff" loading={true}/>}
         <p className='app__pinModal-startText'>Jeśli masz słabą pamięć zapisz go gdzieś, chociażby w notatniku! 😊</p>
         <FaCircleXmark onClick={handleCloseFirstModal} className='app__firstEntry-closeBtn'/>
       </div>
@@ -223,6 +232,9 @@ const FirstEntry = ({ handleShowToast }) => {
         {/* <FaCircleXmark onClick={handleClose} className='app__firstEntry-closeBtn'/> */}
       </div>
     </Modal>}
+    <Modal isNonActiveOpen={isNonActiveOpen} handleClose={handleNonActiveClose}>
+      <div>Strona nie jest narazie aktywna</div>
+    </Modal>
     </>
   );
 };

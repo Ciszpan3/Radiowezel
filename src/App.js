@@ -106,7 +106,7 @@ useEffect(() => {
 
   return (
     <SongsProvider>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path='/' element={<MainPage/>}/>
           <Route path='/adminPage' element={<AdminPage/>}/>
