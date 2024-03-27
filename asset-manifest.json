@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Radiowezel/static/css/main.b47314e3.css",
-    "main.js": "/Radiowezel/static/js/main.43a932dc.js",
+    "main.css": "/Radiowezel/static/css/main.1f3172f0.css",
+    "main.js": "/Radiowezel/static/js/main.aba9adc1.js",
     "static/media/pexels-music.jpg": "/Radiowezel/static/media/pexels-music.8513014dfc760942ee13.jpg",
     "static/media/anm-heart.png": "/Radiowezel/static/media/anm-heart.040a34297072bf43d0be.png",
     "index.html": "/Radiowezel/index.html",
-    "main.b47314e3.css.map": "/Radiowezel/static/css/main.b47314e3.css.map",
-    "main.43a932dc.js.map": "/Radiowezel/static/js/main.43a932dc.js.map"
+    "main.1f3172f0.css.map": "/Radiowezel/static/css/main.1f3172f0.css.map",
+    "main.aba9adc1.js.map": "/Radiowezel/static/js/main.aba9adc1.js.map"
   },
   "entrypoints": [
-    "static/css/main.b47314e3.css",
-    "static/js/main.43a932dc.js"
+    "static/css/main.1f3172f0.css",
+    "static/js/main.aba9adc1.js"
   ]
 }
