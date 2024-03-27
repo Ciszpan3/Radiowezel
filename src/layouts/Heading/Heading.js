@@ -26,7 +26,6 @@ const Heading = () => {
   }
 
   const toggleTheme = () => {
-    console.log(isDarkMode)
     if(isDarkMode) {
       setDarkMode();
       setIsDarkMode(false)

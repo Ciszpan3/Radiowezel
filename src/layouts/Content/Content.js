@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import { SongsContext } from '../../context/SongsProvider';
 import { SongBar } from '../../components';

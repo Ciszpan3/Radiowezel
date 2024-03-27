@@ -48,7 +48,7 @@ const Modal = ({children, isOpen, handleClose, isLoginModal}) => {
             setIsRefreshVisible(true);
         }, 90000);
     }
-  }, [isLoginModal]);
+  }, [isLoginModal, setIsRefreshVisible]);
 
   return ReactDOM.createPortal(( 
     <dialog className='app__modal' ref={modalRef}>

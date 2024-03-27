@@ -51,7 +51,7 @@ const FirstEntry = ({ handleShowToast }) => {
     }
   }
 
-  useEffect(async () => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.post('https://radiowezelbackendwindows.azurewebsites.net/newuser')
@@ -62,36 +62,39 @@ const FirstEntry = ({ handleShowToast }) => {
         console.log(err)
       }
     }
-    try {
-      const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/isvotingactive')
-
-      if(response.data) {
-        const isFirstModalDisplayed = localStorage.getItem('firstModalDisplayed');
-        if (!isFirstModalDisplayed) {
-          localStorage.setItem('firstModalDisplayed', 'true');
-          fetchData();
-          setIsFirstModalOpen(true); // Ustawiamy isOpen na true, aby pokazać modal
-        }
-        if (isFirstModalDisplayed) {
-          const userId = localStorage.getItem('userId')
-          try {
-            await axios.post('https://radiowezelbackendwindows.azurewebsites.net/logout', JSON.stringify(userId), {
-              headers: {
-                'Content-Type': 'application/json'
-              }
-            });
-          } catch(err) {
-            console.log(err)
+    const checkIsWebActive = async () => {
+      try {
+        const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/isvotingactive')
+  
+        if(response.data) {
+          const isFirstModalDisplayed = localStorage.getItem('firstModalDisplayed');
+          if (!isFirstModalDisplayed) {
+            localStorage.setItem('firstModalDisplayed', 'true');
+            fetchData();
+            setIsFirstModalOpen(true); // Ustawiamy isOpen na true, aby pokazać modal
           }
-          setIsOpen(true)
+          if (isFirstModalDisplayed) {
+            const userId = localStorage.getItem('userId')
+            try {
+              await axios.post('https://radiowezelbackendwindows.azurewebsites.net/logout', JSON.stringify(userId), {
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              });
+            } catch(err) {
+              console.log(err)
+            }
+            setIsOpen(true)
+          }
+        } else {
+          setIsNonActiveOpen(true)
         }
-      } else {
-        setIsNonActiveOpen(true)
+      } catch(err) {
+        console.error(err)
       }
-    } catch(err) {
-      console.error(err)
     }
-  }, []);
+    checkIsWebActive();
+  }, [setIsFirstModalOpen, setIsNonActiveOpen, setIsOpen, setUserPin]);
   
   function formatTime(miliseconds) {
     const seconds= Math.floor((miliseconds / 1000) % 60);
@@ -259,7 +262,7 @@ const FirstEntry = ({ handleShowToast }) => {
             />
           ))}
         </div>
-        {isRefreshVisible ? <p className='app__firstEntry-notRemember' onClick={handlePinNotRememebered}>Nie pamiętam kodu</p> : <p className='app__firsteEntry-textNotRemember'>Jeśli nie pamiętasz kodu, za 1 min pojawi się przycisk do resetu</p>}
+        {isRefreshVisible ? <p className='app__firstEntry-notRemember' onClick={handlePinNotRememebered}>Nie pamiętam kodu</p> : <p className='app__firsteEntry-textNotRemember'>Jeśli nie pamiętasz kodu, za 90 sekund pojawi się przycisk do resetu, NIE ODŚWIEŻAJ STRONY!</p>}
         </form>
         {/* <FaCircleXmark onClick={handleClose} className='app__firstEntry-closeBtn'/> */}
       </div>

@@ -127,7 +127,7 @@ const WebSocket = () => {
                 // Tutaj możesz obsłużyć odebraną wiadomość, np. zaktualizować stan komponentu
             });
         }
-    }, [connection]);
+    }, [connection, setDataSongs, setIsFirstModalOpen, setIsNonActiveOpen, setIsOpen, setUserPin, setPlayingSong]);
 };
 
 export default WebSocket
