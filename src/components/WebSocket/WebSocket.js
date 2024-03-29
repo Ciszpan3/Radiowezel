@@ -25,7 +25,6 @@ const WebSocket = () => {
             connection.on("ReceiveMessage", (message) => {
                 if(message === 'Voting started.') {
                   const fetchSongs = async () => {
-                    console.log('Voting started from a webSocket')
                     try {
                         // const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/getsongs', {
                         //     params: {
@@ -33,7 +32,6 @@ const WebSocket = () => {
                         //     }
                         // });
                         // localStorage.setItem('userLike', response.data.userLike)
-                        console.log('open loginFields')
                         const userId = localStorage.getItem('userId')
                         try {
                             await axios.post('https://radiowezelbackendwindows.azurewebsites.net/logout', JSON.stringify(userId), {
@@ -88,7 +86,6 @@ const WebSocket = () => {
                       fetchSongs();
                 } else if(message.includes('SongId')) {
                     const msgObject = JSON.parse(message)
-                    console.log(message)
                     
                     function formatTime(miliseconds) {
                         console.log(miliseconds)
@@ -100,7 +97,6 @@ const WebSocket = () => {
                     const videoId = msgObject.SongId
                     const dur = msgObject.Duration
                       const getPlayingSong = async (videoId, dur) => {
-                        console.log(videoId)
                         const apiKey = 'AIzaSyBsOaeliSFqW6myMwAgpXslA8xhXpT7Owk'
                         const apiUrl =`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${apiKey}`
                         try {
@@ -112,15 +108,12 @@ const WebSocket = () => {
                             id: videoId,
                             duration: `00:0${duration}`
                           }
-                          console.log(songObject)
                           setPlayingSong(songObject)
                         } catch(err) {
                           console.log(err)
                         }
                       }
                       getPlayingSong(videoId, dur)
-                    console.log(`wiadomosc z videoId`)
-                    console.log(message)
                 } else if(message === 'No song is playing.') {
                     setPlayingSong('Narazie nic nie gra')
                 }

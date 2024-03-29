@@ -36,6 +36,22 @@
   text-align: left;
 }
 
+.app__heading-head-th_info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.3rem;
+}
+.app__infoBtn {
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 24px;
+}
+.app__infoBtn:hover {
+  opacity: 0.8;
+}
+
 .app__heading-toggleBtn {
   display: flex;
   position: relative;
@@ -282,6 +298,37 @@
 }
 
 
+.app__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: var(--bg-info);
+  border-radius: 20px;
+
+  width: 100%;
+  gap: 1.25rem;
+}
+
+.app__info-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.app__info-content p {
+  color: var(--text-bl_wh);
+  font-size: 20px;
+  font-family: var(--font-sec);
+}
+
+.app__info-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media screen and (min-width: 800px) {
   .app__heading {
     max-width: 500px;
@@ -352,6 +399,9 @@
     width: 22px;
     height: 22px;
   }
+  .app__infoBtn {
+    font-size: 26px;
+  }
 
 
   [data-theme="dark"] .app__heading-toggleBtn_circle {
@@ -380,6 +430,9 @@
   }
   .app__firsteEntry-textNotRemember {
     font-size: 30px !important;
+  }
+  .app__info-content p {
+    font-size: 24px;
   }
 
   .p_reem-footer {
@@ -435,6 +488,9 @@
   .app__heading-toggleBtn_circle {
     width: 25px;
     height: 25px;
+  }
+  .app__infoBtn {
+    font-size: px;
   }
 
 

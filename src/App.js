@@ -64,8 +64,8 @@ const App = () => {
     };
 }, []);
 useEffect(() => {
+  const userId = localStorage.getItem('userId')
   const handleLogout = async () => {
-    const userId = localStorage.getItem('userId')
     try {
       await axios.post('https://radiowezelbackendwindows.azurewebsites.net/logout', JSON.stringify(userId), {
         headers: {
@@ -76,7 +76,9 @@ useEffect(() => {
       console.log(err)
     }
   }
-  handleLogout();
+  if(userId) {
+    handleLogout();
+  }
 }, [])
 
   const handleShowToast = () => {

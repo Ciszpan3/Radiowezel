@@ -43,7 +43,7 @@ const FirstEntry = ({ handleShowToast }) => {
             }
         });
 
-        await setUserLike(response.data.userLike)
+        setUserLike(response.data.userLike)
         localStorage.setItem('userLike', response.data.userLike)
         setDataSongs(response.data.dtos)
     } catch(err) {
@@ -239,11 +239,7 @@ const FirstEntry = ({ handleShowToast }) => {
     </Modal>
     {!isFirstModalOpen && <Modal isOpen={isOpen} handleClose={handleClose} isLoginModal={true}>
       <div className='app__firstEntry-modal'>
-        <img src={excl_mark} alt="exclamation_mark" />
-        <p>Aplikacja działa na zasadzie głosowań, uczniowie mogą dodawać piosenki poprzez link (youtube)
-        Następnie każdy z dostępem do aplikacji może na daną piosenkę zagłosować
-        Oczywiście nie jest to nieograniczone tak więc głosujcie na to co faktycznie chcecie usłyszeć z głośników.
-        Po dodaniu piosenki występuje czasowy ogranicznik, po jego upłynięciu można ponownie dodać piosenkę i cieszyć się z dobrodziejstw aplikacji.</p>
+        {/* <img src={excl_mark} alt="exclamation_mark" /> */}
         <p>Poniżej wpisz wcześniej wyświetlony kod</p>
         <form className='app__firstEntry-modal_inputCont' id='app__firstEntry-form'>
         {validateMessage && <p style={{color: 'red', fontSize: '28px'}}>{validateMessage}</p>}

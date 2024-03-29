@@ -1,10 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
-import { SongBarInformations, AddSongModal } from '../../components';
+import { SongBarInformations, AddSongModal, Modal } from '../../components';
 import { pexels_music } from '../../assets'; 
 
 import { FaDeezer } from "react-icons/fa";
 import { MdOutlineLibraryAdd } from "react-icons/md";
+import { FaCircleInfo } from "react-icons/fa6";
+import { FaCircleXmark } from "react-icons/fa6";
 
 import CountdownCircle from '../../components/CountDown/CountDown';
 import { SongsContext } from '../../context/SongsProvider';
@@ -16,6 +18,7 @@ const Heading = () => {
   const {startTime, playingSong, userId} = useContext(SongsContext)
 
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
 
   const setDarkMode = () => {
@@ -29,14 +32,31 @@ const Heading = () => {
     if(isDarkMode) {
       setDarkMode();
       setIsDarkMode(false)
+      localStorage.setItem('isDarkMode', true)
     } else {
       setLightMode();
       setIsDarkMode(true)
+      localStorage.setItem('isDarkMode', false)
     }
   }
 
+  useEffect(() => {
+    const isDarkMode = localStorage.getItem('isDarkMode')
+    if(isDarkMode !== undefined && isDarkMode !== null) {
+      if(isDarkMode === true || isDarkMode === 'true') {
+        setDarkMode();
+      } else {
+        setLightMode();
+      }
+    }
+  }, [])
+
   const handleAddSongModalClose = () => {
     setIsAddModalOpen(false)
+  }
+
+  const handleCloseInfoModal = () => {
+    setIsInfoModalOpen(false)
   }
 
   const style = {
@@ -52,8 +72,11 @@ const Heading = () => {
               <FaDeezer className='app__heading-footer-icons smaller-icon'/>
               <p>Aktualnie Leci:</p>
             </div>
-            <div className='app__heading-toggleBtn' onClick={toggleTheme}>
-              <div className='app__heading-toggleBtn_circle'></div>
+            <div className='app__heading-head-th_info'>
+              <div className='app__heading-toggleBtn' onClick={toggleTheme}>
+                <div className='app__heading-toggleBtn_circle'></div>
+              </div>
+              <FaCircleInfo className='app__infoBtn' onClick={() => setIsInfoModalOpen(true)}/>
             </div>
           </div>
           <div className='app__heading-content'>
@@ -87,6 +110,19 @@ const Heading = () => {
           </div>
         </div>
         <AddSongModal isOpen={isAddModalOpen} handleClose={handleAddSongModalClose}/>
+        <Modal isOpen={isInfoModalOpen} handleClose={handleCloseInfoModal}>
+          <div className='app__info'>
+            <div className='app__info-content'>
+              <p className='p_song-title'>Aplikacja działa na zasadzie głosowań, uczniowie mogą dodawać piosenki poprzez link (youtube).
+        Następnie każdy z dostępem do aplikacji może na daną piosenkę zagłosować.
+        Oczywiście nie jest to nieograniczone tak więc głosujcie na to co faktycznie chcecie usłyszeć z głośników.
+        Po dodaniu piosenki występuje czasowy ogranicznik, po jego upłynięciu można ponownie dodać piosenkę i cieszyć się z dobrodziejstw aplikacji.</p>
+            </div>
+            <div className='app__info-close'>
+              <FaCircleXmark onClick={handleCloseInfoModal} className='app__firstEntry-closeBtn'/>
+            </div>
+          </div>
+        </Modal>
       </>}
     </>
   );
