@@ -37,7 +37,7 @@ const App = () => {
           }
         });
       } catch(err) {
-        console.log(err)
+        
       }
     }
 
@@ -60,7 +60,6 @@ const App = () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
       window.removeEventListener("unload", handleUnload);
       handleLogout();
-      console.log(localStorage)
     };
 }, []);
 useEffect(() => {
@@ -73,7 +72,7 @@ useEffect(() => {
         }
       });
     } catch(err) {
-      console.log(err)
+      
     }
   }
   if(userId) {
@@ -110,7 +109,7 @@ useEffect(() => {
       <Router basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path='/' element={<MainPage/>}/>
-          <Route path='/adminPage' element={<AdminPage/>}/>
+          <Route path='/adminpage' element={<AdminPage/>}/>
           <Route path='*' element={<ErrorPage/>}/>
         </Routes>
       </Router>

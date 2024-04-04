@@ -6,7 +6,6 @@ import axios from 'axios';
 import { SongsContext } from '../../context/SongsProvider';
 import { FaCircleXmark } from "react-icons/fa6";
 import { Modal } from '../../components'
-import { excl_mark } from '../../assets';
 import { parseISO, getTime } from 'date-fns';
 import { BeatLoader } from 'react-spinners';
 
@@ -47,7 +46,7 @@ const FirstEntry = ({ handleShowToast }) => {
         localStorage.setItem('userLike', response.data.userLike)
         setDataSongs(response.data.dtos)
     } catch(err) {
-        console.log(err)
+
     }
   }
 
@@ -59,7 +58,7 @@ const FirstEntry = ({ handleShowToast }) => {
         localStorage.setItem('userPin', response.data.userCode)
         setUserPin(response.data.userCode)
       } catch(err) {
-        console.log(err)
+
       }
     }
     const checkIsWebActive = async () => {
@@ -82,7 +81,7 @@ const FirstEntry = ({ handleShowToast }) => {
                 }
               });
             } catch(err) {
-              console.log(err)
+
             }
             setIsOpen(true)
           }
@@ -117,11 +116,50 @@ const FirstEntry = ({ handleShowToast }) => {
       }
       setPlayingSong(songObject)
     } catch(err) {
-      console.log(err)
+
     }
   }
 
   const inputs = useRef([]);
+
+  const handleLogin = async (pinValue) => {
+    const element = document.getElementById('app__firstEntry-form');
+    try {
+      const userPinJson = JSON.stringify(pinValue.toUpperCase())
+      const response = await axios.post(
+        'https://radiowezelbackendwindows.azurewebsites.net/login',
+        `${userPinJson}`, 
+        {
+         headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      if(response.status === 200) {
+        handleClose();
+        handleShowToast()
+        localStorage.setItem('userId', response.data.loginModel.userId)
+        setUserId(response.data.loginModel.userId)
+        const startDate = response.data.loginModel.lastAddedSongDate
+        const startISO = parseISO(startDate);
+        const startMil = getTime(startISO);
+        const endMil = startMil + 7200000;
+        setStartTime(startMil)
+        setEndTime(endMil)
+        await fetchSongs(response.data.loginModel.userId)
+        if(response.data.playingSong.includes('SongId')) {
+          const playingSongJSON = response.data.playingSong
+          const playingSong = JSON.parse(playingSongJSON)
+          await getPlayingSong(playingSong.SongId, playingSong.Duration)
+        } else {
+          setPlayingSong('Żadna piosenka nie gra')
+        }
+        element.style.opacity = '1';
+      }
+    } catch(err) {
+      setValidateMessage('Pin jest nieprawidłowy')
+    }
+  } 
 
     async function handleInputChange(index, event) {
         const value = event.target.value;
@@ -137,52 +175,16 @@ const FirstEntry = ({ handleShowToast }) => {
         newPin[index] = value;
         setPin(newPin);
         const isPinFull = newPin.filter(value => value !== '')
-        let pinValues = '';
-        newPin.forEach(value => {
-          pinValues = pinValues + value
-        });
+        // let pinValues = '';
+        // newPin.forEach(value => {
+        //   pinValues = pinValues + value
+        // });
         if(isPinFull.length === 4) {
           const element = document.getElementById('app__firstEntry-form');
           if (element) {
             element.style.opacity = '0.8';
           }
-          try {
-            const userPinJson = JSON.stringify(pinValues.toUpperCase())
-            const response = await axios.post(
-              'https://radiowezelbackendwindows.azurewebsites.net/login',
-              `${userPinJson}`, // Dane jako string
-              {
-               headers: {
-                  'Content-Type': 'application/json',
-                },
-              }
-            );
-            if(response.status === 200) {
-              handleClose();
-              handleShowToast()
-              localStorage.setItem('userId', response.data.loginModel.userId)
-              setUserId(response.data.loginModel.userId)
-              const startDate = response.data.loginModel.lastAddedSongDate
-              const startISO = parseISO(startDate);
-              const startMil = getTime(startISO);
-              const endMil = startMil + 7200000;
-              setStartTime(startMil)
-              setEndTime(endMil)
-              await fetchSongs(response.data.loginModel.userId)
-              if(response.data.playingSong.includes('SongId')) {
-                const playingSongJSON = response.data.playingSong
-                const playingSong = JSON.parse(playingSongJSON)
-                await getPlayingSong(playingSong.SongId, playingSong.Duration)
-              } else {
-                setPlayingSong('Żadna piosenka nie gra')
-              }
-              element.style.opacity = '1';
-            }
-          } catch(err) {
-            console.log(err)
-            setValidateMessage('Pin jest nieprawidłowy')
-
-          }
+          handleLogin(newPin.join(''));
         }
 
         // Przechodzi do następnego pola, jeśli wprowadzono wartość i nie jest to ostatnie pole
@@ -192,6 +194,9 @@ const FirstEntry = ({ handleShowToast }) => {
     }
 
     function handleKeyDown(index, event) {
+      if(event.key === 'Enter') {
+        handleLogin(pin.join(''));
+      }
       if (event.key === 'Backspace' && pin[index] !== '') {
         const newPin = [...pin];
         newPin[index] = '';
@@ -211,7 +216,7 @@ const FirstEntry = ({ handleShowToast }) => {
         localStorage.setItem('userPin', response.data.userCode)
         setUserPin(response.data.userCode)
       } catch(err) {
-        console.log(err)
+
       }
     }
 

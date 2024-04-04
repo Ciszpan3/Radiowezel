@@ -15,18 +15,15 @@ const AdminSong = ({title, url, duration, id, setSongsToCheck}) => {
 
       setSongsToCheck(response.data)
     } catch(err) {
-      console.log(err)
     }
   }
-
-  console.log(dataSongs)
 
   const refuseSong = async () => {
     try {
       await axios.post(`https://radiowezelbackendwindows.azurewebsites.net//refusesong/${id}`)
       await fetchSongsToCheck()
     } catch(err) {
-      console.log(err)
+
     }
   }
 
@@ -35,7 +32,7 @@ const AdminSong = ({title, url, duration, id, setSongsToCheck}) => {
       await axios.post(`https://radiowezelbackendwindows.azurewebsites.net//acceptsong/${id}`)
       await fetchSongsToCheck()
     } catch(err) {
-      console.log(err)
+
     }
   }
 

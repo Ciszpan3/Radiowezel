@@ -21,6 +21,7 @@ const SongsProvider = ({children}) => {
     const [isFirstModalOpen, setIsFirstModalOpen] = useState(false)
     const [userPin, setUserPin] = useState('')
     const [isRefreshVisible, setIsRefreshVisible] = useState(false)
+    const [isButtonActive, setIsButtonActive] = useState(true)
 
 
     const handleShowToast = (msg) => {
@@ -38,7 +39,6 @@ const SongsProvider = ({children}) => {
                 return 'Piosenka została dodana'
             }
         } catch(err) {
-            console.log(err);
             if(err.response.status === 400) {
                 return 'Piosenka zawiera nicenzuralne słowa'
             } else {
@@ -46,27 +46,9 @@ const SongsProvider = ({children}) => {
             }
         }
     }, []);
-    // useEffect(() => {
-    //     const fetchSongs = async () => {
-    //         try {
-    //             const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/getsongs', {
-    //                 params: {
-    //                     userId: localStorage.getItem('userId')
-    //                 }
-    //             });
-
-    //             setDataSongs(response.data.dtos)
-    //         } catch(err) {
-    //             console.log(err)
-    //         }
-    //     }
-    //     if(localStorage.getItem('userId')) {
-    //         fetchSongs();
-    //     }
-    // }, [addSong, setUserId])
 
   return (
-    <SongsContext.Provider value={{songs, setSongs, userId, setUserId, dataSongs, setDataSongs, addSong, handleShowToast, startTime, endTime, setStartTime, setEndTime, playingSong, setPlayingSong, userLike, setUserLike, isOpen, setIsOpen, isNonActiveOpen, setIsNonActiveOpen, isFirstModalOpen, setIsFirstModalOpen, userPin, setUserPin, isRefreshVisible, setIsRefreshVisible}}>
+    <SongsContext.Provider value={{songs, setSongs, userId, setUserId, dataSongs, setDataSongs, addSong, handleShowToast, startTime, endTime, setStartTime, setEndTime, playingSong, setPlayingSong, userLike, setUserLike, isOpen, setIsOpen, isNonActiveOpen, setIsNonActiveOpen, isFirstModalOpen, setIsFirstModalOpen, userPin, setUserPin, isRefreshVisible, setIsRefreshVisible, isButtonActive, setIsButtonActive}}>
       {children}
     </SongsContext.Provider>
   )

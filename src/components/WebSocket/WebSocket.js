@@ -19,7 +19,7 @@ const WebSocket = () => {
     useEffect(() => {
         if (connection) {
             connection.start()
-                .then(() => console.log("Connection established!"))
+                .then(() => null)
                 .catch(err => console.error("Error while establishing connection :(", err));
 
             connection.on("ReceiveMessage", (message) => {
@@ -40,7 +40,7 @@ const WebSocket = () => {
                             }
                             });
                         } catch(err) {
-                            console.log(err)
+
                         }
                         setIsNonActiveOpen(false)
                         if(userId) {
@@ -53,7 +53,7 @@ const WebSocket = () => {
                                   localStorage.setItem('userPin', response.data.userCode)
                                   setUserPin(response.data.userCode)
                                 } catch(err) {
-                                  console.log(err)
+                                  
                                 }
                               }
                               await fetchData();
@@ -61,7 +61,7 @@ const WebSocket = () => {
                         }
                         // setDataSongs(response.data.dtos)
                     } catch(err) {
-                        console.log(err)
+
                     }
                   }
                   fetchSongs();
@@ -80,7 +80,7 @@ const WebSocket = () => {
                             });
                             setDataSongs(response.data.dtos)
                         } catch(err) {
-                            console.log(err)
+                            
                         }
                       }
                       fetchSongs();
@@ -88,7 +88,6 @@ const WebSocket = () => {
                     const msgObject = JSON.parse(message)
                     
                     function formatTime(miliseconds) {
-                        console.log(miliseconds)
                         const seconds= Math.floor((miliseconds / 1000) % 60);
                         const minutes = Math.floor((miliseconds / (1000 * 60)) % 60);
                         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
@@ -110,7 +109,7 @@ const WebSocket = () => {
                           }
                           setPlayingSong(songObject)
                         } catch(err) {
-                          console.log(err)
+                          
                         }
                       }
                       getPlayingSong(videoId, dur)

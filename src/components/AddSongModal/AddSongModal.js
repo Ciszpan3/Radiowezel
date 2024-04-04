@@ -49,7 +49,7 @@ const AddSongModal = ({isOpen, handleClose}) => {
 
             return duration
         } catch(error) {
-            console.log(error)
+            
         }
     }
 
@@ -69,7 +69,7 @@ const AddSongModal = ({isOpen, handleClose}) => {
             return
           }
       } catch(error) {
-          console.log(error)
+          
       }
   }
 
@@ -120,7 +120,6 @@ const AddSongModal = ({isOpen, handleClose}) => {
                   .then(msg => {
                     if(msg === 'Piosenka została dodana') {
                       handleShowToast(msg)
-                      console.log(localStorage)
                       handleClose();
                       const startMil = Date.now()
                       const endMil = startMil + 7200000;
@@ -136,7 +135,6 @@ const AddSongModal = ({isOpen, handleClose}) => {
             }
         } catch(error) {
             setValidateMessage('Podany link jest nieprawidłowy')
-            console.log(error)
         }
         setDisabled(false)
     }
