@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { AdminSong, Modal } from '../../components';
 
@@ -10,14 +9,10 @@ const AdminPage = () => {
 
   const [isOpen, setIsOpen] = useState(true)
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
-  const [login, setLogin] = useState('')
-  const [password, setPassword] = useState('')
   const [isLoginned, setIsLoggined] = useState(false)
   const [validateMessage, setValidateMessage] = useState('')
   const [songsToCheck, setSongsToCheck] = useState([])
   const [pin, setPin] = useState('')
-
-  const navigate = useNavigate()
 
   const handleClose = () => {
     setIsOpen(false)

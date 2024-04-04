@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import axios from 'axios';
 
 // import { heart, anm_heart } from '../../assets'; 
@@ -8,17 +8,7 @@ import './SongBarLikes.css'
 
 const SongBarLikes = ({likes, id}) => {
 
-  // const ref = useRef(null)
-
-  //const userLike = localStorage.getItem('userLike')
-
-  // const toggleHeart = () => {
-  //   ref.current.classList.toggle('heart-active')
-  //   setIsLiked(prev => !prev)
-  // }
-
   const { setDataSongs, userId, userLike, setUserLike, isButtonActive, setIsButtonActive } = useContext(SongsContext)
-  //const [isButtonActive, setIsButtonActive] = useState(true)
   const heartRef = useRef(null);
 
   const fetchSongs = async () => {

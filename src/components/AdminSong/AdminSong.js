@@ -1,12 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import axios from 'axios';
-import { SongsContext } from '../../context/SongsProvider';
 
 import './AdminSong.css'
 
 const AdminSong = ({title, url, duration, id, setSongsToCheck}) => {
-
-  const {dataSongs} = useContext(SongsContext)
 
   const fetchSongsToCheck = async () => {
     const adminCode = localStorage.getItem('adminId')
