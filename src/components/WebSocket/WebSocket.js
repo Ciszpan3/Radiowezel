@@ -10,7 +10,7 @@ const WebSocket = () => {
 
     useEffect(() => {
         const newConnection = new HubConnectionBuilder()
-            .withUrl("https://radiowezelbackendwindows.azurewebsites.net/websocket")
+            .withUrl("http://34.116.238.114:8080/websocket")
             .build();
 
         setConnection(newConnection);
@@ -26,15 +26,9 @@ const WebSocket = () => {
                 if(message === 'Voting started.') {
                   const fetchSongs = async () => {
                     try {
-                        // const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/getsongs', {
-                        //     params: {
-                        //         userId: localStorage.getItem('userId')
-                        //     }
-                        // });
-                        // localStorage.setItem('userLike', response.data.userLike)
                         const userId = localStorage.getItem('userId')
                         try {
-                            await axios.post('https://radiowezelbackendwindows.azurewebsites.net/logout', JSON.stringify(userId), {
+                            await axios.post('http://34.116.238.114:8080/logout', JSON.stringify(userId), {
                             headers: {
                                 'Content-Type': 'application/json'
                             }
@@ -48,7 +42,7 @@ const WebSocket = () => {
                         } else {
                             const fetchData = async () => {
                                 try {
-                                  const response = await axios.post('https://radiowezelbackendwindows.azurewebsites.net/newuser')
+                                  const response = await axios.post('http://34.116.238.114:8080/newuser')
                                   // setUserId(response.data.id)
                                   localStorage.setItem('userPin', response.data.userCode)
                                   setUserPin(response.data.userCode)
@@ -73,7 +67,7 @@ const WebSocket = () => {
                 else if(message === 'Like added to song.') {
                     const fetchSongs = async () => {
                         try {
-                            const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/getsongs', {
+                            const response = await axios.get('http://34.116.238.114:8080/getsongs', {
                                 params: {
                                     userId: localStorage.getItem('userId')
                                 }

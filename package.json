@@ -1,5 +1,4 @@
 {
-  "homepage": "https://ciszpan3.github.io/Radiowezel/",
   "name": "radiowezel",
   "version": "0.1.0",
   "private": true,
@@ -35,8 +34,9 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "PORT=80 react-scripts start",
+    "start": "PORT=443 react-scripts start",
     "build": "react-scripts build",
+    "buildrec": "NODE_ENV=production webpack --progress --colors",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -57,5 +57,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "webpack-cli": "^5.1.4"
   }
 }

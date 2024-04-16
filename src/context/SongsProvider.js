@@ -30,7 +30,7 @@ const SongsProvider = ({children}) => {
 
     const addSong = useCallback(async (songObject) => {
         try {
-            const response = await axios.post('https://radiowezelbackendwindows.azurewebsites.net/addSong', songObject, {
+            const response = await axios.post('http://34.116.238.114:8080/addSong', songObject, {
                 headers: {
                   'Content-Type': 'application/json'
                 }

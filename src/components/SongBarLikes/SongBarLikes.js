@@ -13,7 +13,7 @@ const SongBarLikes = ({likes, id}) => {
 
   const fetchSongs = async () => {
     try {
-      const response = await fetch(`https://radiowezelbackendwindows.azurewebsites.net/getsongs?userId=${userId}`);
+      const response = await fetch(`http://34.116.238.114:8080/getsongs?userId=${userId}`);
       localStorage.setItem('userLike', response.data.userLike)
       setUserLike(response.data.userLike)
       setDataSongs(response.data.dtos)
@@ -23,16 +23,8 @@ const SongBarLikes = ({likes, id}) => {
   }
 
   const removeLike = async (songRemoveId) => {
-    // try {
-    //   const response = await axios.post(`https://radiowezelbackendwindows.azurewebsites.net/unlikesong/${songRemoveId}?userId=${userId}`)
-    //   if (response.ok) {
-    //     await fetchSongs();
-    //   }
-    // } catch (err) {
-    //   console.error('Wystąpił błąd:', err);
-    // }
     try {
-      const response = await fetch(`https://radiowezelbackendwindows.azurewebsites.net/unlikesong/${songRemoveId}?userId=${userId}`, {
+      const response = await fetch(`http://34.116.238.114:8080/unlikesong/${songRemoveId}?userId=${userId}`, {
         method: 'POST'
       });
     
@@ -49,7 +41,7 @@ const SongBarLikes = ({likes, id}) => {
 
   const addElseLike = async () => {
     try {
-      const response = await fetch(`https://radiowezelbackendwindows.azurewebsites.net/likesong/${id}?userId=${userId}`, {
+      const response = await fetch(`http://34.116.238.114:8080/likesong/${id}?userId=${userId}`, {
         method: 'POST'
       });
       if (response.ok) {
@@ -65,7 +57,7 @@ const SongBarLikes = ({likes, id}) => {
     setUserLike(id)
     if (!userLike || userLike === 'null') {
         try {
-            const response = await axios.post(`https://radiowezelbackendwindows.azurewebsites.net/likesong/${id}?userId=${userId}`)
+            const response = await axios.post(`http://34.116.238.114:8080/likesong/${id}?userId=${userId}`)
             if (response.ok) {
               await fetchSongs();
             }
@@ -81,7 +73,7 @@ const SongBarLikes = ({likes, id}) => {
         }
     } else if (userLike && String(id) !== String(userLike)) {
       try {
-        const response1 = await fetch(`https://radiowezelbackendwindows.azurewebsites.net/unlikesong/${userLike}?userId=${userId}`, {
+        const response1 = await fetch(`http://34.116.238.114:8080/unlikesong/${userLike}?userId=${userId}`, {
           method: 'POST'
         });
 

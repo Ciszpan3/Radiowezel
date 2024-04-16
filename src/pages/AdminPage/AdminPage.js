@@ -23,7 +23,7 @@ const AdminPage = () => {
 
   const fetchSongsToCheck = async (adminCode) => {
     try {
-      const response = axios.get(`https://radiowezelbackendwindows.azurewebsites.net/songstocheck?adminCode=${adminCode}`)
+      const response = axios.get(`http://34.116.238.114:8080/songstocheck?adminCode=${adminCode}`)
 
       return response
     } catch(err) {
@@ -33,7 +33,7 @@ const AdminPage = () => {
 
   const handleSendCode = async () => {
     try { 
-      const response = await axios.post('https://radiowezelbackendwindows.azurewebsites.net/sendadminemail')
+      const response = await axios.post('http://34.116.238.114:8080/sendadminemail')
       if(response.status === 200) {
         setIsLoginModalOpen(true)
         setIsOpen(false)
@@ -66,7 +66,7 @@ const AdminPage = () => {
     if(isPinFull.length === 4) {
       const code = pinValues.toUpperCase()
       try {
-      const response = await axios.post(`https://radiowezelbackendwindows.azurewebsites.net/adminlogin?code=${code}`)
+      const response = await axios.post(`http://34.116.238.114:8080/adminlogin?code=${code}`)
       localStorage.setItem('adminId', response.data)
       if(response.status === 200) {
         setIsLoggined(true)

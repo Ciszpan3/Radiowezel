@@ -36,7 +36,7 @@ const FirstEntry = ({ handleShowToast }) => {
 
   const fetchSongs = async (userId) => {
     try {
-        const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/getsongs', {
+        const response = await axios.get('http://34.116.238.114:8080/getsongs', {
             params: {
                 userId: userId
             }
@@ -53,7 +53,7 @@ const FirstEntry = ({ handleShowToast }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post('https://radiowezelbackendwindows.azurewebsites.net/newuser')
+        const response = await axios.post('http://34.116.238.114:8080/newuser')
         // setUserId(response.data.id)
         localStorage.setItem('userPin', response.data.userCode)
         setUserPin(response.data.userCode)
@@ -63,7 +63,7 @@ const FirstEntry = ({ handleShowToast }) => {
     }
     const checkIsWebActive = async () => {
       try {
-        const response = await axios.get('https://radiowezelbackendwindows.azurewebsites.net/isvotingactive')
+        const response = await axios.get('http://34.116.238.114:8080/isvotingactive')
   
         if(response.data) {
           const isFirstModalDisplayed = localStorage.getItem('firstModalDisplayed');
@@ -75,13 +75,13 @@ const FirstEntry = ({ handleShowToast }) => {
           if (isFirstModalDisplayed) {
             const userId = localStorage.getItem('userId')
             try {
-              await axios.post('https://radiowezelbackendwindows.azurewebsites.net/logout', JSON.stringify(userId), {
+              await axios.post('http://34.116.238.114:8080/logout', JSON.stringify(userId), {
                 headers: {
                   'Content-Type': 'application/json'
                 }
               });
             } catch(err) {
-
+              
             }
             setIsOpen(true)
           }
@@ -127,7 +127,7 @@ const FirstEntry = ({ handleShowToast }) => {
     try {
       const userPinJson = JSON.stringify(pinValue.toUpperCase())
       const response = await axios.post(
-        'https://radiowezelbackendwindows.azurewebsites.net/login',
+        'http://34.116.238.114:8080/login',
         `${userPinJson}`, 
         {
          headers: {
@@ -211,7 +211,7 @@ const FirstEntry = ({ handleShowToast }) => {
 
     const fetchData = async () => {
       try {
-        const response = await axios.post('https://radiowezelbackendwindows.azurewebsites.net/newuser')
+        const response = await axios.post('http://34.116.238.114:8080/newuser')
         // setUserId(response.data.id)
         localStorage.setItem('userPin', response.data.userCode)
         setUserPin(response.data.userCode)

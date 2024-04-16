@@ -31,7 +31,7 @@ const App = () => {
     const handleLogout = async () => {
       const userId = localStorage.getItem('userId')
       try {
-        await axios.post('https://localhost:7087/logout', JSON.stringify(userId), {
+        await axios.post('http://34.116.238.114:8080/logout', JSON.stringify(userId), {
           headers: {
             'Content-Type': 'application/json'
           }
@@ -66,7 +66,7 @@ useEffect(() => {
   const userId = localStorage.getItem('userId')
   const handleLogout = async () => {
     try {
-      await axios.post('https://radiowezelbackendwindows.azurewebsites.net/logout', JSON.stringify(userId), {
+      await axios.post('http://34.116.238.114:8080/logout', JSON.stringify(userId), {
         headers: {
           'Content-Type': 'application/json'
         }
