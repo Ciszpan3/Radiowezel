@@ -8,7 +8,7 @@ const Modal = ({children, isOpen, handleClose, isLoginModal}) => {
 
   const modalRef = useRef(null)
   const previousActiveElement = useRef(null)
-  const {setIsRefreshVisible} = useContext(SongsContext)
+  const {setIsRefreshVisible, setRefreshCountdown} = useContext(SongsContext)
 
   useEffect(() => {
     if(!modalRef.current) {

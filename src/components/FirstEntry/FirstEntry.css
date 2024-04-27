@@ -91,3 +91,9 @@
   border-radius: 8px;
   text-transform: uppercase;
 }
+
+.refresh_countdown {
+  color: var(--text-bl_wh);
+  font-family: var(--font-info);
+  font-size: 14.5px;
+}
