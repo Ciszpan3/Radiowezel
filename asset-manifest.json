@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Radiowezel/static/css/main.48102223.css",
-    "main.js": "/Radiowezel/static/js/main.3b017699.js",
-    "static/media/pexels-music.jpg": "/Radiowezel/static/media/pexels-music.8513014dfc760942ee13.jpg",
-    "static/media/anm-heart.png": "/Radiowezel/static/media/anm-heart.040a34297072bf43d0be.png",
-    "index.html": "/Radiowezel/index.html",
-    "main.48102223.css.map": "/Radiowezel/static/css/main.48102223.css.map",
-    "main.3b017699.js.map": "/Radiowezel/static/js/main.3b017699.js.map"
+    "main.css": "/static/css/main.2feededa.css",
+    "main.js": "/static/js/main.434c4534.js",
+    "static/media/pexels-music.jpg": "/static/media/pexels-music.8513014dfc760942ee13.jpg",
+    "static/media/anm-heart.png": "/static/media/anm-heart.040a34297072bf43d0be.png",
+    "index.html": "/index.html",
+    "main.2feededa.css.map": "/static/css/main.2feededa.css.map",
+    "main.434c4534.js.map": "/static/js/main.434c4534.js.map"
   },
   "entrypoints": [
-    "static/css/main.48102223.css",
-    "static/js/main.3b017699.js"
+    "static/css/main.2feededa.css",
+    "static/js/main.434c4534.js"
   ]
 }
