@@ -34,9 +34,8 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "PORT=80 react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
-    "buildrec": "NODE_ENV=production webpack --progress --colors",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

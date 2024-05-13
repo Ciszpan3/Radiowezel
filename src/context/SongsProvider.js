@@ -35,7 +35,7 @@ const SongsProvider = ({ children }) => {
   const addSong = useCallback(async (songObject) => {
     try {
       const response = await axios.post(
-        `http://${"34.116.238.114"}/addSong`,
+        `http://34.116.238.114/addSong`,
         songObject,
         {
           headers: {

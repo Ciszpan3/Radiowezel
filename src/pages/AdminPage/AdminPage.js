@@ -26,7 +26,7 @@ const AdminPage = () => {
   const fetchSongsToCheck = async (adminCode) => {
     try {
       const response = axios.get(
-        `http://${"34.116.238.114"}/songstocheck?adminCode=${adminCode}`
+        `http://34.116.238.114/songstocheck?adminCode=${adminCode}`
       );
 
       return response;
@@ -37,9 +37,7 @@ const AdminPage = () => {
 
   const handleSendCode = async () => {
     try {
-      const response = await axios.post(
-        `http://${"34.116.238.114"}/sendadminemail`
-      );
+      const response = await axios.post(`http://34.116.238.114/sendadminemail`);
       if (response.status === 200) {
         setIsLoginModalOpen(true);
         setIsOpen(false);
@@ -73,7 +71,7 @@ const AdminPage = () => {
       const code = pinValues.toUpperCase();
       try {
         const response = await axios.post(
-          `http://${"34.116.238.114"}/adminlogin?code=${code}`
+          `http://34.116.238.114/adminlogin?code=${code}`
         );
         localStorage.setItem("adminId", response.data);
         if (response.status === 200) {

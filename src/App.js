@@ -35,7 +35,7 @@ const App = () => {
       const userId = localStorage.getItem("userId");
       try {
         await axios.post(
-          `http://${"34.116.238.114"}/logout`,
+          `http://34.116.238.114/logout`,
           JSON.stringify(userId),
           {
             headers: {
@@ -72,7 +72,7 @@ const App = () => {
     const handleLogout = async () => {
       try {
         await axios.post(
-          `http://${"34.116.238.114"}/logout`,
+          `http://34.116.238.114/logout`,
           JSON.stringify(userId),
           {
             headers: {

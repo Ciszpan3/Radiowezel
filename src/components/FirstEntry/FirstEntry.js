@@ -54,7 +54,7 @@ const FirstEntry = ({ handleShowToast }) => {
 
   const fetchSongs = async (userId) => {
     try {
-      const response = await axios.get(`http://${"34.116.238.114"}/getsongs`, {
+      const response = await axios.get(`http://34.116.238.114/getsongs`, {
         params: {
           userId: userId,
         },
@@ -69,7 +69,7 @@ const FirstEntry = ({ handleShowToast }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post(`http://${"34.116.238.114"}/newuser`);
+        const response = await axios.post(`http://34.116.238.114/newuser`);
         // setUserId(response.data.id)
         localStorage.setItem("userPin", response.data.userCode);
         setUserPin(response.data.userCode);
@@ -78,7 +78,7 @@ const FirstEntry = ({ handleShowToast }) => {
     const checkIsWebActive = async () => {
       try {
         const response = await axios.get(
-          `http://${"34.116.238.114"}/isvotingactive`
+          `http://34.116.238.114/isvotingactive`
         );
 
         if (response.data) {
@@ -94,7 +94,7 @@ const FirstEntry = ({ handleShowToast }) => {
             const userId = localStorage.getItem("userId");
             try {
               await axios.post(
-                `http://${"34.116.238.114"}/logout`,
+                `http://34.116.238.114/logout`,
                 JSON.stringify(userId),
                 {
                   headers: {
@@ -144,7 +144,7 @@ const FirstEntry = ({ handleShowToast }) => {
     try {
       const userPinJson = JSON.stringify(pinValue.toUpperCase());
       const response = await axios.post(
-        `http://${"34.116.238.114"}/login`,
+        `http://34.116.238.114/login`,
         `${userPinJson}`,
         {
           headers: {
@@ -229,7 +229,7 @@ const FirstEntry = ({ handleShowToast }) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.post(`http://${"34.116.238.114"}/newuser`);
+      const response = await axios.post(`http://34.116.238.114/newuser`);
       // setUserId(response.data.id)
       localStorage.setItem("userPin", response.data.userCode);
       setUserPin(response.data.userCode);

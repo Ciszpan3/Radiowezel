@@ -17,7 +17,7 @@ const WebSocket = () => {
 
   useEffect(() => {
     const newConnection = new HubConnectionBuilder()
-      .withUrl(`http://${"34.116.238.114"}/websocket`)
+      .withUrl(`http://34.116.238.114/websocket`)
       .build();
 
     setConnection(newConnection);
@@ -39,7 +39,7 @@ const WebSocket = () => {
               const userId = localStorage.getItem("userId");
               try {
                 await axios.post(
-                  `http://${"34.116.238.114"}/logout`,
+                  `http://34.116.238.114/logout`,
                   JSON.stringify(userId),
                   {
                     headers: {
@@ -55,7 +55,7 @@ const WebSocket = () => {
                 const fetchData = async () => {
                   try {
                     const response = await axios.post(
-                      `http://${"34.116.238.114"}/newuser`
+                      `http://34.116.238.114/newuser`
                     );
                     // setUserId(response.data.id)
                     localStorage.setItem("userPin", response.data.userCode);
@@ -77,7 +77,7 @@ const WebSocket = () => {
           const fetchSongs = async () => {
             try {
               const response = await axios.get(
-                `http://${"34.116.238.114"}/getsongs`,
+                `http://34.116.238.114/getsongs`,
                 {
                   params: {
                     userId: localStorage.getItem("userId"),

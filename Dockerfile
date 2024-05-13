@@ -85,8 +85,8 @@ COPY --from=build /app/build /usr/share/nginx/html
 
 # ENV SERVER_IP=address
 
-RUN rm /etc/nginx/conf.d/default.conf
-COPY ./nginx.conf /etc/nginx/conf.d
+# RUN rm /etc/nginx/conf.d/default.conf
+# COPY ./nginx.conf /etc/nginx/conf.d
 
 # Expose port 80 for the Nginx server
 EXPOSE 80
