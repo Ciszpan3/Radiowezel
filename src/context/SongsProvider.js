@@ -22,6 +22,8 @@ const SongsProvider = ({ children }) => {
   const [isRefreshVisible, setIsRefreshVisible] = useState(false);
   const [refreshCountdown, setRefreshCountdown] = useState(90);
   const [isButtonActive, setIsButtonActive] = useState(true);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false)
+  
   // const SERVER_ADDRESS = process.env.SERVER_ADDRESS
   // const path = process.env.PATH
   // console.log(process.env)
@@ -35,7 +37,7 @@ const SongsProvider = ({ children }) => {
   const addSong = useCallback(async (songObject) => {
     try {
       const response = await axios.post(
-        `http://34.116.238.114/addSong`,
+        `http://radiowezel.duckdns.org:8080/addSong`,
         songObject,
         {
           headers: {
@@ -88,6 +90,8 @@ const SongsProvider = ({ children }) => {
         setIsButtonActive,
         refreshCountdown,
         setRefreshCountdown,
+        // isLoggedIn,
+        // setIsLoggedIn
       }}
     >
       {children}

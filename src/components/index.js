@@ -5,7 +5,6 @@ import FirstEntry from "./FirstEntry/FirstEntry";
 import Modal from "./Modal/Modal";
 import AddSongModal from "./AddSongModal/AddSongModal";
 import ToastComponent from "./ToastComponent/ToastComponent";
-import AdminSong from "./AdminSong/AdminSong";
 import WebSocket from "./WebSocket/WebSocket";
 
 export {
@@ -16,6 +15,5 @@ export {
   Modal,
   AddSongModal,
   ToastComponent,
-  AdminSong,
   WebSocket
 }

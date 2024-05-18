@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SongsProvider, { SongsContext } from "./context/SongsProvider";
+import React, { useState, useEffect } from "react";
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SongsProvider from "./context/SongsProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastComponent } from "./components";
 
 import { Heading, Content } from "./layouts";
 import { FirstEntry, WebSocket } from "./components";
-import { AdminPage } from "./pages";
+// import { AdminPage } from "./pages";
 
 import "./App.css";
 import axios from "axios";
@@ -35,7 +35,7 @@ const App = () => {
       const userId = localStorage.getItem("userId");
       try {
         await axios.post(
-          `http://34.116.238.114/logout`,
+          `http://radiowezel.duckdns.org:8080/logout`,
           JSON.stringify(userId),
           {
             headers: {
@@ -72,7 +72,7 @@ const App = () => {
     const handleLogout = async () => {
       try {
         await axios.post(
-          `http://34.116.238.114/logout`,
+          `http://radiowezel.duckdns.org:8080/logout`,
           JSON.stringify(userId),
           {
             headers: {
@@ -107,21 +107,15 @@ const App = () => {
     </>
   );
 
-  const ErrorPage = () => (
-    <div className="app__error">
-      <h1>Nie znaleziono podanej strony</h1>
-    </div>
-  );
+  // const ErrorPage = () => (
+  //   <div className="app__error">
+  //     <h1>Nie znaleziono podanej strony</h1>
+  //   </div>
+  // );
 
   return (
     <SongsProvider>
-      <Router basename={process.env.PUBLIC_URL}>
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/adminpage" element={<AdminPage />} />
-          <Route path="*" element={<ErrorPage />} />
-        </Routes>
-      </Router>
+      <MainPage/>
     </SongsProvider>
   );
 };

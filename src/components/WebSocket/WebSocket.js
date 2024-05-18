@@ -13,11 +13,12 @@ const WebSocket = () => {
     setIsNonActiveOpen,
     setIsFirstModalOpen,
     setUserPin,
+    isLoggedIn
   } = useContext(SongsContext);
 
   useEffect(() => {
     const newConnection = new HubConnectionBuilder()
-      .withUrl(`http://34.116.238.114/websocket`)
+      .withUrl(`http://radiowezel.duckdns.org:8080/websocket`)
       .build();
 
     setConnection(newConnection);
@@ -39,7 +40,7 @@ const WebSocket = () => {
               const userId = localStorage.getItem("userId");
               try {
                 await axios.post(
-                  `http://34.116.238.114/logout`,
+                  `http://radiowezel.duckdns.org:8080/logout`,
                   JSON.stringify(userId),
                   {
                     headers: {
@@ -50,12 +51,13 @@ const WebSocket = () => {
               } catch (err) {}
               setIsNonActiveOpen(false);
               if (userId) {
+                setDataSongs([])
                 setIsOpen(true);
               } else {
                 const fetchData = async () => {
                   try {
                     const response = await axios.post(
-                      `http://34.116.238.114/newuser`
+                      `http://radiowezel.duckdns.org:8080/newuser`
                     );
                     // setUserId(response.data.id)
                     localStorage.setItem("userPin", response.data.userCode);
@@ -68,7 +70,7 @@ const WebSocket = () => {
               // setDataSongs(response.data.dtos)
             } catch (err) {}
           };
-          fetchSongs();
+          fetchSongs()
         } else if (message === "Voting ended.") {
           setIsNonActiveOpen(true);
           setPlayingSong("Żadna piosenka narazie nie gra");
@@ -77,7 +79,7 @@ const WebSocket = () => {
           const fetchSongs = async () => {
             try {
               const response = await axios.get(
-                `http://34.116.238.114/getsongs`,
+                `http://radiowezel.duckdns.org:8080/getsongs`,
                 {
                   params: {
                     userId: localStorage.getItem("userId"),
